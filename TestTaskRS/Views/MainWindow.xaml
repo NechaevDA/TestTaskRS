@@ -4,9 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskRS"
+        xmlns:viewModels="clr-namespace:TestTaskRS.ViewModels"
+        xmlns:views="clr-namespace:TestTaskRS.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}">
+    <!--<Window.Resources>
+        <viewModels:MainWindowViewModel x:Key="ViewModel"/>
+    </Window.Resources>-->
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" LastChildFill="True">
+            <Button DockPanel.Dock="Bottom"  Command="{Binding ClearAllNotificationsCommand}">Очистить</Button>
+            <ListView ItemsSource="{Binding Notifications}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <views:NotificationView></views:NotificationView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+        <views:NotificationForm Grid.Column="1" DataContext="{Binding NotificationFormViewModel}"></views:NotificationForm>
     </Grid>
 </Window>
