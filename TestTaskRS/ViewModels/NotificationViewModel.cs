@@ -17,6 +17,11 @@ namespace TestTaskRS.ViewModels
             set => SetValue(ref Model.IsRead, value, nameof(IsRead));
         }
 
+        public string CreationTime
+        {
+            get => Model.CreationTime.ToString(@"HH\:mm");
+        }
+
         public NotificationModel Model { get; }
         public Command ReadCommand { get; }
 

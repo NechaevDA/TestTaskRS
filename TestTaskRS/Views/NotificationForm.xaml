@@ -7,12 +7,19 @@
              xmlns:viewModels="clr-namespace:TestTaskRS.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             DataContext=" viewModels:NotificationFormViewModel">
+             d:DataContext="{d:DesignInstance viewModels:NotificationFormViewModel }">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="{x:Type TextBlock}" BasedOn="{StaticResource MainText}">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="3 3 3 6"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </UserControl.Resources>
     <StackPanel>
-            <TextBlock Text="Header"/>
-            <TextBox Text="{Binding Header}"/>
-            <TextBlock Text="Message"/>
-            <TextBox Text="{Binding Message}"/>
-            <Button Command="{Binding CreateNotificationCommand}">Create notification</Button>
+        <TextBlock Text="Наименование банка"/>
+        <TextBox Text="{Binding Header}"/>
+        <TextBlock Text="Описание уведомления"/>
+        <TextBox Text="{Binding Message}"/>
+        <Button Command="{Binding CreateNotificationCommand}" Width="100" Margin="10">Создать</Button>
     </StackPanel>
 </UserControl>

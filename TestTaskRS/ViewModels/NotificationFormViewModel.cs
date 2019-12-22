@@ -46,7 +46,8 @@ namespace TestTaskRS.ViewModels
         public NotificationFormViewModel()
         {
             CreateNotificationCommand = new Command(CreateNotification);
-            Header = "Hello world!";
+            Header = "Заголовок";
+            Message = "Сообщение";
         }
 
         private void CreateNotification()

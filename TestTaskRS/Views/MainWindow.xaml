@@ -7,26 +7,31 @@
         xmlns:viewModels="clr-namespace:TestTaskRS.ViewModels"
         xmlns:views="clr-namespace:TestTaskRS.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="Форма отображения уведомлений" Height="450" Width="800"
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}">
-    <!--<Window.Resources>
-        <viewModels:MainWindowViewModel x:Key="ViewModel"/>
-    </Window.Resources>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Column="0" LastChildFill="True">
-            <Button DockPanel.Dock="Bottom"  Command="{Binding ClearAllNotificationsCommand}">Очистить</Button>
-            <ListView ItemsSource="{Binding Notifications}">
+            <Button DockPanel.Dock="Bottom" Width="100" Margin="10" Command="{Binding ClearAllNotificationsCommand}">Очистить</Button>
+            <ListView ItemsSource="{Binding Notifications}" BorderThickness="0" Name="ListRoot"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="MaxWidth" Value="{Binding ElementName=ListRoot, Path=Width}"></Setter>
+                        <Setter Property="Focusable" Value="False"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <views:NotificationView></views:NotificationView>
+                        <views:NotificationView Margin="5" MaxWidth="{Binding ElementName=ListRoot, Path=ActualWidth}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </DockPanel>
-        <views:NotificationForm Grid.Column="1" DataContext="{Binding NotificationFormViewModel}"></views:NotificationForm>
+        <views:NotificationForm Grid.Column="1" Margin="10" DataContext="{Binding NotificationFormViewModel}"></views:NotificationForm>
     </Grid>
 </Window>
